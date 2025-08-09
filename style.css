@@ -172,3 +172,29 @@ footer {
     color: var(--text-secondary);
     font-size: 0.85rem;
 }
+/* --- Estilos para Animação de Digitação e Cursor --- */
+
+/* Adiciona um espaço para o cursor não ficar colado no texto */
+#typing-line1, #typing-line2 {
+    display: inline;
+}
+
+.cursor {
+    display: inline-block;
+    background-color: var(--accent-color); /* Usa a cor de destaque definida no :root */
+    width: 10px;
+    height: 1.1rem; /* Altura para combinar com o texto */
+    margin-left: 5px;
+    vertical-align: middle;
+    animation: blink 1s step-end infinite;
+}
+
+/* Animação de piscar */
+@keyframes blink {
+    from, to {
+        background-color: transparent;
+    }
+    50% {
+        background-color: var(--accent-color);
+    }
+}
