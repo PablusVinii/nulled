@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const promptElement = document.querySelector('.prompt');
 
     // --- SEU CONTEÚDO (ESTRUTURA DE ARQUIVOS) ---
-    const filesystem = {
+    const filesystem = {    
         'articles': {
             type: 'directory',
             content: {
@@ -35,15 +35,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const getCurrentDirContent = () => {
         return currentPath.reduce((dir, path) => dir[path].content, filesystem);
     };
-    
-    // --- FUNÇÃO DE EXECUÇÃO MODIFICADA ---
-    const executeCommand = (command, isFromClick = false) => {
+
+    const executeCommand = (command, suppressEcho = false) => {
         const parts = command.trim().split(' ');
         const cmd = parts[0].toLowerCase();
         const args = parts.slice(1);
 
-        // Só mostra o comando digitado se não vier de um clique
-        if (!isFromClick) {
+        if (!suppressEcho) {
             printLine(`<span class="input-history"><span class="prompt">${getPrompt()}</span> ${command}</span>`);
         }
 
@@ -64,11 +62,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 let outputStr = '';
                 for (const item in items) {
                     if (items[item].type === 'directory') {
-                        // MODIFICADO: Adiciona a classe 'clickable' e o atributo 'data-command'
-                        outputStr += `<span class="directory clickable" data-command="cd ${item}">${item}/</span>\n`;
+                        // MODIFICADO: Usa data-type e data-path para ações diretas
+                        outputStr += `<span class="directory clickable" data-type="directory" data-path="${item}">${item}/</span>\n`;
                     } else {
-                        // MODIFICADO: Adiciona a classe 'clickable' e o atributo 'data-command'
-                        outputStr += `<span class="file clickable" data-command="cat ${item}">${item}</span>\n`;
+                        outputStr += `<span class="file clickable" data-type="file" data-path="${item}">${item}</span>\n`;
                     }
                 }
                 printLine(outputStr.trim() || ' ');
@@ -82,8 +79,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 break;
             
             case 'help': printLine(`Comandos disponíveis:\n${helpText}`); break;
-            case 'whoami': executeCommand('cat whoami.txt', true); break; // Reutiliza o 'cat'
-            case 'contato': executeCommand('cat contato.txt', true); break; // Reutiliza o 'cat'
+            case 'whoami': printLine(filesystem['whoami.txt'].content); break;
+            case 'contato': printLine(filesystem['contato.txt'].content); break;
             case 'clear': output.innerHTML = ''; break;
             case 'banner': printBanner(); break;
             case '': break;
@@ -109,14 +106,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     terminal.addEventListener('click', () => { inputLine.focus(); });
 
-    // NOVO: Event Listener para os cliques nos arquivos/diretórios
+    // --- LÓGICA DE CLIQUE MODIFICADA ---
     output.addEventListener('click', (e) => {
         const target = e.target;
         if (target.classList.contains('clickable')) {
-            const command = target.getAttribute('data-command');
-            // Simula o comando sendo digitado e executado
-            printLine(`<span class="input-history"><span class="prompt">${getPrompt()}</span> ${command}</span>`);
-            executeCommand(command, true);
+            const type = target.getAttribute('data-type');
+            const path = target.getAttribute('data-path');
+
+            if (type === 'directory') {
+                // Ação para diretório: entra e lista o conteúdo
+                executeCommand(`cd ${path}`, true); // O 'true' suprime o eco do comando
+                executeCommand('ls', true);          // Executa 'ls' silenciosamente
+            } else if (type === 'file') {
+                // Ação para arquivo: mostra o conteúdo
+                executeCommand(`cat ${path}`, true);
+            }
         }
     });
 
