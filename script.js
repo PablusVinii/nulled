@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const terminal = document.getElementById('terminal');
 
     // --- SEU CONTEÚDO VAI AQUI ---
-    // Simulação de um sistema de arquivos. É aqui que você adiciona seus artigos, projetos, etc.
     const filesystem = {
         'articles': {
             type: 'directory',
@@ -65,58 +64,61 @@ Você pode me encontrar em:
 `
         }
     };
+    
+    // Texto de ajuda que será usado no banner e no comando 'help'
+    const helpText = `
+<span class="directory">ls</span>        - Lista arquivos e diretórios.
+<span class="directory">cat [arq]</span> - Mostra o conteúdo de um arquivo.
+<span class="directory">whoami</span>    - Mostra uma breve bio sobre mim.
+<span class="directory">contato</span>   - Exibe minhas informações de contato.
+<span class="directory">help</span>      - Mostra esta lista de comandos novamente.
+<span class="directory">clear</span>     - Limpa a tela do terminal.
+<span class="directory">banner</span>    - Mostra a mensagem inicial.`;
 
-    let currentPath = []; // Começa na raiz
 
     const executeCommand = (command) => {
         const parts = command.trim().split(' ');
-        const cmd = parts[0];
+        const cmd = parts[0].toLowerCase(); // Comandos não diferenciam maiúsculas/minúsculas
         const args = parts.slice(1);
 
-        // Adiciona o comando digitado ao output
         printLine(`<span class="input-history"><span class="prompt">sec_shell@mainframe:~$</span> ${command}</span>`);
 
         switch (cmd) {
             case 'help':
-                printLine(`Comandos disponíveis:
-  <span class="directory">help</span>      - Mostra esta mensagem de ajuda.
-  <span class="directory">ls</span>        - Lista arquivos e diretórios.
-  <span class="directory">cat</span> [arq] - Mostra o conteúdo de um arquivo.
-  <span class="directory">whoami</span>    - Mostra uma breve bio.
-  <span class="directory">clear</span>     - Limpa a tela do terminal.
-  <span class="directory">banner</span>    - Mostra o banner inicial.`);
+                printLine(`Comandos disponíveis:\n${helpText}`);
                 break;
             case 'ls':
-                const path = args[0] || '';
-                const items = getItems(path);
-                if (items) {
-                    let outputStr = '';
-                    for (const item in items.content) {
-                        if (items.content[item].type === 'directory') {
-                            outputStr += `<span class="directory">${item}/</span>\n`;
-                        } else {
-                            outputStr += `<span class="file">${item}</span>\n`;
-                        }
+                const items = filesystem;
+                let outputStr = '';
+                for (const item in items) {
+                    if (items[item].type === 'directory') {
+                        outputStr += `<span class="directory">${item}/</span>\n`;
+                    } else {
+                        outputStr += `<span class="file">${item}</span>\n`;
                     }
-                    printLine(outputStr.trim());
-                } else {
-                    printError(`ls: cannot access '${path}': No such file or directory`);
                 }
+                printLine(outputStr.trim());
                 break;
             case 'cat':
                 if (args.length === 0) {
-                    printError('cat: missing operand');
+                    printError('cat: missing operand. Usage: cat [filename]');
                     break;
                 }
-                const file = getItems(args[0]);
+                const filename = args[0];
+                const file = filesystem[filename];
                 if (file && file.type === 'file') {
                     printLine(file.content);
+                } else if (filesystem[filename] && filesystem[filename].type === 'directory') {
+                    printError(`cat: ${filename}: Is a directory`);
                 } else {
-                    printError(`cat: ${args[0]}: No such file or directory`);
+                    printError(`cat: ${filename}: No such file or directory`);
                 }
                 break;
             case 'whoami':
                 printLine(filesystem['whoami.txt'].content);
+                break;
+            case 'contato':
+                printLine(filesystem['contato.txt'].content);
                 break;
             case 'clear':
                 output.innerHTML = '';
@@ -125,33 +127,15 @@ Você pode me encontrar em:
                 printBanner();
                 break;
             case '':
-                break; // Não faz nada se o comando for vazio
+                break;
             default:
                 printError(`command not found: ${cmd}. Digite 'help' para ver a lista de comandos.`);
         }
     };
 
     // --- Funções Auxiliares ---
-
-    const getItems = (pathStr) => {
-        let currentLevel = filesystem;
-        if (pathStr) {
-            const pathParts = pathStr.split('/').filter(p => p);
-            for (const part of pathParts) {
-                if (currentLevel[part] && currentLevel[part].type === 'directory') {
-                    currentLevel = currentLevel[part].content;
-                } else if (currentLevel[part] && currentLevel[part].type === 'file' && part === pathParts[pathParts.length - 1]) {
-                    return currentLevel[part];
-                } else {
-                    return null; // Caminho inválido
-                }
-            }
-        }
-        return { type: 'directory', content: currentLevel };
-    };
-
     const printLine = (text) => {
-        output.innerHTML += `<div class="output-line">${text}</div>`;
+        output.innerHTML += `<div class="output-line">${text.replace(/\n/g, '<br>')}</div>`;
         scrollToBottom();
     };
 
@@ -164,7 +148,8 @@ Você pode me encontrar em:
         terminal.scrollTop = terminal.scrollHeight;
         output.scrollTop = output.scrollHeight;
     };
-
+    
+    // --- FUNÇÃO MODIFICADA ---
     const printBanner = () => {
         const banner = `
 <pre>
@@ -175,10 +160,9 @@ Você pode me encontrar em:
 /_______  /|___|  /\___  >____/____/
         \/      \/     \/           
 </pre>
-Bem-vindo ao meu terminal.
-Digite '<span class="directory">help</span>' para começar.
+Bem-vindo ao meu terminal. Use os comandos abaixo para navegar:
 `;
-        printLine(banner);
+        printLine(banner + '\n' + helpText); // Concatena o banner com a ajuda
     };
 
     // --- Event Listeners ---
