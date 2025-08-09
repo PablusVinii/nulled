@@ -1,0 +1,174 @@
+/* --- Configurações Globais e Variáveis de Cor --- */
+:root {
+    --bg-color: #000000;
+    --text-primary: #e6edf3;
+    --text-secondary: #7d8590;
+    --border-color: #30363d;
+    --accent-color: #ffffff;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    font-family: 'Fira Code', 'Courier New', Courier, monospace;
+    font-size: 16px;
+    line-height: 1.8; /* Aumentado para melhor legibilidade em textos longos */
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+}
+
+.container {
+    max-width: 720px; /* Largura mais adequada para artigos */
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+a {
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: color 0.2s ease-in-out;
+}
+a:hover {
+    color: var(--accent-color);
+}
+
+strong {
+    color: var(--accent-color);
+    font-weight: 500;
+}
+
+/* --- Cabeçalho e Navegação --- */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border-color);
+    max-width: 960px; /* Mantém a largura do header consistente com a home */
+}
+
+.logo {
+    font-weight: 500;
+    font-size: 1.2rem;
+}
+
+nav {
+    display: flex;
+    gap: 25px;
+}
+nav a {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+nav a:hover {
+    color: var(--text-primary);
+}
+
+
+/* --- Estilos do Conteúdo do Artigo --- */
+.article-content {
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+.article-content h1 {
+    font-size: 2.2rem;
+    font-weight: 500;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 15px;
+    margin-bottom: 40px;
+}
+
+.article-content h2 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 10px;
+    margin-top: 50px;
+    margin-bottom: 30px;
+}
+
+.article-content h3 {
+    font-size: 1.3rem;
+    font-weight: 500;
+    margin-top: 40px;
+    margin-bottom: 15px;
+}
+
+.article-content p {
+    margin-bottom: 1.2em;
+    color: var(--text-secondary);
+}
+
+.article-image {
+    max-width: 100%;
+    height: auto;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    display: block;
+}
+
+/* --- Caixa de "O que estudar?" --- */
+.study-box {
+    background-color: #0d1117;
+    border: 1px solid var(--border-color);
+    padding: 25px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.study-box h4 {
+    font-size: 1.1rem;
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: var(--accent-color);
+}
+
+.study-box ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin-bottom: 20px;
+}
+
+.study-box li {
+    padding-left: 25px;
+    position: relative;
+    margin-bottom: 12px;
+    color: var(--text-secondary);
+}
+
+.study-box li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--text-primary);
+    font-size: 1.2em;
+    line-height: 1;
+}
+
+.study-box .tip {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-top: 20px;
+    margin-bottom: 0;
+    border-top: 1px dashed var(--border-color);
+    padding-top: 20px;
+}
+
+.study-box .tip strong {
+    color: var(--text-primary);
+}
+
+
+/* --- Rodapé --- */
+footer {
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+    padding: 20px;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    max-width: 960px; /* Mantém a largura do footer consistente com a home */
+    margin: 0 auto;
+}
