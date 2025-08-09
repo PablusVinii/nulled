@@ -8,8 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const text2 = 'I share content about cybersecurity.';
 
     // Configurações da animação
-    const typingSpeed = 100; // Milissegundos por caractere
-    const delayBetweenLines = 500; // Atraso antes de começar a segunda linha
+    const typingSpeed = 80 // Milissegundos por caractere
+    const delayBetweenLines = 300; // Atraso antes de começar a segunda linha
 
     // HTML do cursor
     const cursorHTML = '<span class="cursor"></span>';
