@@ -1,7 +1,7 @@
 /* --- Configurações Globais --- */
 body {
-    background-color: #0d1117; /* Preto do GitHub Dark */
-    color: #c9d1d9; /* Cinza claro do GitHub Dark */
+    background-color: #0d1117;
+    color: #c9d1d9;
     font-family: 'Fira Code', 'Courier New', Courier, monospace;
     font-size: 1em;
     line-height: 1.5;
@@ -9,17 +9,14 @@ body {
     padding: 15px;
 }
 
-/* --- Efeito de Scanlines (opcional, para um visual retrô) --- */
+/* --- Efeito de Scanlines (opcional) --- */
 body::after {
     content: " ";
     display: block;
     position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
+    top: 0; left: 0; bottom: 0; right: 0;
     background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
-    z-index: 2;
+    z-index: -1;
     background-size: 100% 2px, 3px 100%;
     pointer-events: none;
 }
@@ -35,16 +32,18 @@ body::after {
 #output {
     flex-grow: 1;
     overflow-y: auto;
-    padding-right: 15px; /* Espaço para a barra de rolagem */
+    padding-right: 15px;
 }
 
-/* --- Estilo dos Links --- */
-a {
-    color: #58a6ff; /* Azul para links */
+/* --- Estilo dos Links e Itens Clicáveis (MODIFICADO) --- */
+a, .clickable {
+    color: #58a6ff;
     text-decoration: none;
+    cursor: pointer; /* Muda o cursor para a "mãozinha" */
 }
-a:hover {
-    text-decoration: underline;
+
+a:hover, .clickable:hover {
+    text-decoration: underline; /* Sublinha ao passar o mouse */
 }
 
 /* --- Linha de Comando --- */
@@ -54,10 +53,13 @@ a:hover {
 }
 
 .prompt {
-    color: #39FF14; /* Verde neon para o prompt */
     font-weight: bold;
     margin-right: 8px;
     white-space: nowrap;
+}
+
+.prompt .path {
+    color: #79c0ff;
 }
 
 #input-line {
@@ -69,28 +71,15 @@ a:hover {
     flex-grow: 1;
     outline: none;
     padding: 0;
-    caret-color: #39FF14; /* Cor do cursor de texto */
+    caret-color: #39FF14;
 }
 
-/* --- Estilos para diferentes tipos de output --- */
-.output-line {
-    white-space: pre-wrap; /* Permite quebras de linha no texto */
-    word-break: break-all;
-}
+/* --- Estilos para output --- */
+.output-line { white-space: pre-wrap; word-break: break-all; }
+.input-history { color: #8b949e; }
+.error { color: #f85149; }
 
-.input-history {
-    color: #8b949e; /* Cinza mais escuro para comandos já digitados */
-}
-
-.directory {
-    color: #58a6ff; /* Azul para diretórios */
-    font-weight: bold;
-}
-
-.file {
-    color: #c9d1d9; /* Cor padrão para arquivos */
-}
-
-.error {
-    color: #f85149; /* Vermelho para erros */
-}
+/* Para itens clicáveis, a cor já é definida em .clickable, mas mantemos estas para distinção */
+.directory { color: #58a6ff; font-weight: bold; }
+.file.clickable { color: #c9d1d9; } /* Arquivos clicáveis mantêm a cor padrão */
+.file.clickable:hover { color: #58a6ff; } /* Mas mudam de cor no hover */
