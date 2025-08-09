@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Textos a serem digitados
     const text1 = 'sec_shell@mainframe ~$';
-    const text2 = 'I share content about cybersecurity.';
+    const text2 = 'Conpartilhando conteúdo sobre cibersegurança.';
 
     // Configurações da animação
     const typingSpeed = 80 // Milissegundos por caractere
