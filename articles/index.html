@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artigos - sec_shell</title>
+    <style>
+        /* Estilos básicos para o exemplo - você pode colocar isso em um arquivo .css separado */
+        body {
+            background-color: #121212;
+            color: #E0E0E0;
+            font-family: 'Courier New', Courier, monospace;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Cabeçalho */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid #333;
+        }
+
+        header .logo {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #00FF00; /* Verde hacker */
+        }
+
+        header nav a {
+            color: #E0E0E0;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 1.1em;
+            transition: color 0.3s;
+        }
+
+        header nav a:hover {
+            color: #00FF00;
+        }
+
+        /* Conteúdo principal da lista de artigos */
+        .article-list h1 {
+            font-size: 2.5em;
+            color: #FFFFFF;
+            margin-bottom: 40px;
+            text-align: center;
+            border-bottom: 2px solid #00FF00;
+            padding-bottom: 10px;
+        }
+
+        .article-card {
+            background-color: #1E1E1E;
+            border: 1px solid #333;
+            padding: 25px;
+            margin-bottom: 30px;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .article-card:hover {
+            transform: translateY(-5px);
+            border-color: #00FF00;
+        }
+
+        .article-card h2 {
+            margin-top: 0;
+            font-size: 1.8em;
+            color: #00FF00;
+        }
+
+        .article-card .meta {
+            font-size: 0.9em;
+            color: #888;
+            margin-bottom: 15px;
+        }
+
+        .article-card .excerpt {
+            color: #BDBDBD;
+            margin-bottom: 20px;
+        }
+
+        .article-card .read-more-btn {
+            display: inline-block;
+            background-color: transparent;
+            border: 1px solid #00FF00;
+            color: #00FF00;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .article-card .read-more-btn:hover {
+            background-color: #00FF00;
+            color: #121212;
+        }
+
+        /* Rodapé */
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            border-top: 1px solid #333;
+            font-size: 0.9em;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <!-- Cabeçalho Principal -->
+    <header class="container">
+        <div class="logo">sec_shell</div>
+        <nav>
+            <a href="#">INÍCIO</a>
+            <a href="#">ARTIGOS</a>
+            <a href="#">FERRAMENTAS</a>
+            <a href="#">SOBRE</a>
+        </nav>
+    </header>
+
+    <main class="container article-list">
+        <h1>Todos os Artigos</h1>
+
+        <!-- Cartão do Artigo 1 -->
+        <article class="article-card">
+            <h2>A Trilha do Hacker Ético: O Guia Definitivo</h2>
+            <p class="meta">Publicado em 11 de Agosto de 2025 • Leitura de 10 min</p>
+            <p class="excerpt">
+                Esqueça a imagem de Hollywood. Ser um hacker ético é sobre método, curiosidade e uma ética inegociável. Este guia é o mapa definitivo para quem deseja transformar a paixão por tecnologia em uma carreira, começando do absoluto zero.
+            </p>
+            <a href="/articles/como-se-tornar-um-hacker.html" class="read-more-btn">Leia Mais &rarr;</a>
+        </article>
+
+        <!-- Cartão do Artigo 2 -->
+        <article class="article-card">
+            <h2>A Arte da Invisibilidade: Como Escrever com IA sem Deixar Rastros</h2>
+            <p class="meta">Publicado em 12 de Agosto de 2025 • Leitura de 8 min</p>
+            <p class="excerpt">
+                Usar IA para escrever não é sobre enganar, é sobre dominar. Aprenda a refinar textos gerados por IA a tal ponto que sua autoria humana se torne a força dominante e inconfundível, passando por qualquer detector e elevando a qualidade do seu trabalho.
+            </p>
+            <a href="/articles/como-usar-ia-para-escrever-sem-ser-detectado.html" class="read-more-btn">Leia Mais &rarr;</a>
+        </article>
+
+        
+        
+    </main>
+
+    <!-- Rodapé -->
+    <footer>
+        <p>© 2025 SEC_SHELL. Todos os direitos reservados.</p>
+    </footer>
+
+</body>
+</html>
