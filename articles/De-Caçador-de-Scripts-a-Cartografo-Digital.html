@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>De Caçador de Scripts a Cartógrafo Digital: Minha Jornada no Reconhecimento Web - sec_shell</title>
+    <!-- Links para CSS e Fontes, se necessário -->
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Estilos CSS do blog sec_shell */
+        body { background-color: #121212; color: #E0E0E0; font-family: 'Fira Code', monospace; line-height: 1.8; margin: 0; }
+        .container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+        header { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; border-bottom: 1px solid #333; }
+        header .logo { font-size: 1.8em; font-weight: bold; color: #00FF00; }
+        header nav a { color: #E0E0E0; text-decoration: none; margin-left: 25px; }
+        .article-content h1 { font-size: 2.5em; color: #FFFFFF; margin: 40px 0; text-align: center; }
+        .article-content h2 { font-size: 2em; color: #00FF00; border-bottom: 1px solid #333; padding-bottom: 10px; margin-top: 40px; }
+        .article-content p { font-size: 1.1em; color: #BDBDBD; }
+        .article-content ul { list-style-type: '→ '; padding-left: 25px; }
+        .article-content li { margin-bottom: 10px; padding-left: 10px; }
+        strong { color: #00FF00; font-weight: 500; }
+        .commandment-box, .topic-box { background-color: #1E1E1E; border: 1px solid #333; padding: 20px; margin-top: 30px; }
+        .commandment-box h3, .topic-box h3 { margin-top: 0; font-size: 1.5em; color: #FFFFFF; }
+        h4 { font-size: 1.2em; color: #00FF00; margin-top: 20px; margin-bottom: 15px; }
+        footer { text-align: center; padding: 20px; margin-top: 40px; border-top: 1px solid #333; font-size: 0.9em; color: #888; }
+    </style>
+</head>
+<body>
+    <header class="container">
+        <div class="logo">sec_shell</div>
+        <nav>
+            <a href="/index.html">INÍCIO</a>
+            <a href="/articles/">ARTIGOS</a>
+            <a href="#">FERRAMENTAS</a>
+            <a href="#">SOBRE</a>
+        </nav>
+    </header>
+
+    <main class="container article-content">
+        <!-- Título do Artigo -->
+        <h1>De Caçador de Scripts a Cartógrafo Digital: Minha Jornada no Reconhecimento Web</h1>
+
+        <!-- Seção de Introdução Pessoal -->
+        <section>
+            <h2>A Ilusão da Força Bruta</h2>
+            <p>Eu me lembro bem do início. Terminal aberto, um alvo na mira e aquela sensação de poder. Eu rodava o `nmap -A`, o `ffuf` com uma wordlist de milhões de linhas e o `amass` no modo mais agressivo possível. O resultado? Um dilúvio de dados. Gigabytes de texto que eu mal conseguia ler. Eu me sentia produtivo, mas no fundo, estava completamente perdido. Eu era um caçador atirando para todos os lados na esperança de acertar algo, mas sem a menor ideia de como era a floresta ao meu redor. Eu não encontrava nada relevante, e a frustração era minha companheira constante.</p>
+            <p>Este artigo é sobre a minha mudança de mentalidade. É sobre como eu deixei de ser um mero "operador de ferramentas" para me tornar um <strong>cartógrafo digital</strong>. A fase de reconhecimento (recon) não é sobre força bruta; é sobre desenhar um mapa detalhado do território inimigo antes de sequer pensar em atacar. É aqui que, na minha experiência, 80% das batalhas são ganhas.</p>
+        </section>
+        
+        <!-- Seções de Desenvolvimento -->
+        <section class="topics-list">
+            
+            <div class="topic-box">
+                <h3>1. Mapeando o Continente: A Caça aos Subdomínios</h3>
+                <p>Eu costumava ver os subdomínios como uma simples lista de alvos. Hoje, eu os vejo como os diferentes bairros de uma grande cidade. O `www.alvo.com` é o centro comercial, bem policiado e robusto. Mas e o `dev.alvo.com`, `beta.api.alvo.com` ou `intranet.alvo.com`? Esses são os distritos industriais, as áreas residenciais em construção, os becos esquecidos. É nesses lugares, longe dos holofotes, que a segurança costuma ser mais frágil e as portas, destrancadas.</p>
+                <p><strong>A Minha Descoberta:</strong> A ficha caiu quando parei de apenas coletar subdomínios e comecei a <strong>categorizá-los</strong>. Um subdomínio não é só um nome, é uma pista sobre sua função. Entender se um domínio é de desenvolvimento, staging, uma API ou um blog de marketing muda completamente a abordagem. O contexto é tudo. Um erro 404 em um blog é normal; um erro 500 em uma API de desenvolvimento é uma mina de ouro em potencial.</p>
+                <h4>Como eu resolvi isso na prática:</h4>
+                <ul>
+                    <li>Começo sempre com reconhecimento passivo para não fazer barulho: `subfinder`, `amass -passive`, e consultas em `crt.sh` e `virustotal`.</li>
+                    <li>Com a lista inicial, uso o `httpx` para descobrir quais subdomínios estão vivos e em quais portas HTTP/HTTPS eles respondem. Isso me dá o "pulso" do alvo.</li>
+                    <li>Organizo tudo em um arquivo de texto ou em uma ferramenta como o Obsidian, anotando ao lado de cada subdomínio uma hipótese sobre sua função (ex: "api.customer.com - provável API REST para clientes").</li>
+                    <li>Uso o `aquatone` ou `gowsiness` para tirar screenshots de todas as páginas iniciais. Uma imagem vale mais que mil palavras e ajuda a identificar rapidamente painéis de login ou páginas de erro.</li>
+                </ul>
+            </div>
+
+            <div class="topic-box">
+                <h3>2. Batendo às Portas: O que os Serviços nos Dizem</h3>
+                <p>Se um servidor é um prédio, as portas de rede (ports) são, literalmente, suas portas e janelas. A porta 443 é a entrada principal, brilhante e reforçada. A porta 22 (SSH) é a porta dos funcionários, que exige uma chave específica. Mas e a porta 8080? Ou a 9000? Podem ser uma janela de serviço esquecida aberta no porão, levando a um painel de controle de um desenvolvedor.</p>
+                <p><strong>A Minha Descoberta:</strong> O meu erro era a força bruta cega. Eu rodava um `nmap` completo em cada subdomínio, esperando horas por resultados que, na maioria das vezes, eram apenas ruído. A grande virada foi adotar uma abordagem em duas fases: velocidade primeiro, profundidade depois. A velocidade me dá o mapa geral; a profundidade me permite investigar os pontos interessantes sem me afogar em informações inúteis.</p>
+                <h4>Como eu resolvi isso na prática:</h4>
+                <ul>
+                    <li>Primeiro, um scan de portas extremamente rápido em todos os subdomínios vivos com o `naabu` ou `rustscan`, focando nas portas web mais comuns (80, 443, 8000, 8080, 8443, etc).</li>
+                    <li>Analiso a saída. Um subdomínio `dev` com uma porta `8080` aberta é muito mais interessante do que o site principal apenas com a porta `443`.</li>
+                    <li><strong>Apenas nos alvos promissores</strong> eu rodo um `nmap` mais detalhado para identificar versões e rodar scripts de vulnerabilidades: `nmap -sV -sC -p8080 dev.alvo.com`.</li>
+                    <li>Sempre anoto a tecnologia e a versão do serviço. Um `nginx/1.18` em uma porta não padrão pode ter configurações diferentes e mais permissivas que a versão do servidor principal.</li>
+                </ul>
+            </div>
+
+            <div class="topic-box">
+                <h3>3. Arqueologia Digital: Arquivos, Endpoints e Segredos</h3>
+                <p>Essa é a minha parte favorita. É aqui que nos tornamos arqueólogos digitais. Não estamos mais olhando para a fachada do prédio, mas sim vasculhando seus arquivos, plantas antigas e diários de engenharia. Um arquivo `app.js` é o diário de um desenvolvedor; o `Wayback Machine` é o arquivo fotográfico da cidade; e um `ffuf` bem direcionado é como um detector de metais para salas secretas (`/admin`, `/backup`, `/config`).</p>
+                <p><strong>A Minha Descoberta:</strong> Eu me libertei da tirania da `common.txt`. Sim, ela é um bom começo, mas a verdadeira magia acontece quando você cria <strong>wordlists contextuais</strong>. Se eu encontro um endpoint `/api/v1/users`, minha mente imediatamente começa a testar variações: `/api/v1/admin`, `/api/v2/users`, `/api/v1/users.bak`, `/api/v1/users.old`. Cada descoberta alimenta a próxima. É um ciclo de feedback, não uma busca linear.</p>
+                <h4>Como eu resolvi isso na prática:</h4>
+                <ul>
+                    <li>Começo sempre pelo óbvio: `robots.txt` e `sitemap.xml`. É impressionante o que as empresas "pedem" aos robôs para não olharem. É um mapa do tesouro gratuito.</li>
+                    <li>Uso o `gau` e o `waybackurls` para extrair todos os endpoints que o Google e o Archive.org já viram. Isso revela APIs antigas e páginas esquecidas.</li>
+                    <li>Analiso os arquivos JavaScript com o `LinkFinder` e o `SecretFinder`. Eles automatizam a busca por endpoints, chaves de API e outros segredos que nunca deveriam estar no lado do cliente.</li>
+                    <li>Uso o `ffuf` de forma inteligente, com wordlists menores e mais focadas, e adicionando extensões relevantes para a tecnologia do alvo (`-e .php,.js,.bak,.zip`).</li>
+                </ul>
+            </div>
+
+            <div class="topic-box">
+                <h3>4. O Espião Silencioso: Usando o Mundo Contra o Alvo (OSINT)</h3>
+                <p>Antes de tentar arrombar a porta da frente, por que não conversar com os vizinhos? Google, GitHub e Shodan são os vizinhos fofoqueiros da internet. Eles sabem de coisas que o próprio alvo esqueceu que contou. Eles podem ter uma cópia da chave que o alvo deixou cair na rua (uma senha vazada em um commit do GitHub) ou saber de uma janela que sempre fica aberta (um serviço vulnerável indexado pelo Shodan).</p>
+                <p><strong>A Minha Descoberta:</strong> Eu subestimava o "dorking". Achava que era truque de iniciante. A revelação foi entender que o OSINT não é sobre "hackear o Google", mas sobre encontrar <strong>erros operacionais</strong> do alvo. Uma empresa que vaza acidentalmente uma chave de API no GitHub não tem um problema de código, tem um problema de processo. E esses são, muitas vezes, os mais fáceis de explorar e os que têm maior impacto.</p>
+                <h4>Como eu resolvi isso na prática:</h4>
+                <ul>
+                    <li>Criei um arquivo de "Google Dorks" que uso para todos os alvos: `site:alvo.com filetype:log "password"`, `site:alvo.com inurl:admin`, `site:alvo.com ext:sql`.</li>
+                    <li>No GitHub, uso a busca avançada para procurar por `org:NomeDaEmpresaAlvo` combinado com palavras-chave como `api_key`, `secret`, `credentials`, `AWS_ACCESS_KEY_ID`.</li>
+                    <li>Uso o Shodan para pesquisar pelos blocos de IP (ASNs) da empresa, procurando por serviços expostos em portas não padrão, com banners de software desatualizado.</li>
+                    <li>Essa fase é contínua. Volto a ela sempre que descubro um novo subdomínio ou tecnologia em uso pelo alvo.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Seção de Conclusão Filosófica -->
+        <section>
+            <h2>Minha Filosofia: O Reconhecimento como um Mindset</h2>
+            <p>Se eu pudesse deixar uma única mensagem, seria esta: <strong>pare de caçar exploits e comece a construir mapas</strong>. O reconhecimento não é uma etapa chata que você precisa "terminar" para começar a parte divertida. Ele *é* a parte divertida. É o trabalho de detetive, a solução de quebra-cabeças, a arte de conectar pontos que ninguém mais viu. As ferramentas são apenas pincéis e lupas; o verdadeiro poder está na sua curiosidade e na sua capacidade de transformar dados brutos em um mapa coeso da superfície de ataque. Quando você entende o terreno melhor do que os próprios defensores, as vulnerabilidades não precisam ser caçadas. Elas simplesmente se revelam a você.</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 SEC_SHELL. Todos os direitos reservados.</p>
+    </footer>
+</body>
+</html>
