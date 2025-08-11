@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Os 5 Mandamentos da Minha Vida Digital - sec_shell</title>
+    <link rel="stylesheet" href="style.css"> <!-- Supondo que você tenha um style.css -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Adicionando estilos básicos aqui para o exemplo funcionar de forma autônoma */
+        body {
+            background-color: #121212;
+            color: #E0E0E0;
+            font-family: 'Fira Code', monospace;
+            line-height: 1.8;
+            margin: 0;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid #333;
+        }
+        header .logo {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #00FF00;
+        }
+        header nav a {
+            color: #E0E0E0;
+            text-decoration: none;
+            margin-left: 25px;
+        }
+        .article-content h1 {
+            font-size: 2.5em;
+            color: #FFFFFF;
+            margin: 40px 0;
+            text-align: center;
+        }
+        .article-content h2 {
+            font-size: 2em;
+            color: #00FF00;
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
+            margin-top: 40px;
+        }
+        .article-content p {
+            font-size: 1.1em;
+            color: #BDBDBD;
+        }
+        .article-content ul {
+            list-style-type: '→ '; /* Estilo de lista "hacker" */
+            padding-left: 25px;
+        }
+        .article-content li {
+            margin-bottom: 10px;
+            padding-left: 10px;
+        }
+        strong {
+            color: #00FF00;
+            font-weight: 500;
+        }
+        .commandment-box {
+            background-color: #1E1E1E;
+            border: 1px solid #333;
+            padding: 20px;
+            margin-top: 30px;
+        }
+        .commandment-box h3 {
+            margin-top: 0;
+            font-size: 1.5em;
+            color: #FFFFFF;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            border-top: 1px solid #333;
+            font-size: 0.9em;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <!-- Cabeçalho Principal -->
+    <header class="container">
+        <div class="logo">sec_shell</div>
+        <nav>
+            <a href="/index.html">INÍCIO</a>
+            <a href="/articles/">ARTIGOS</a>
+            <a href="#">FERRAMENTAS</a>
+            <a href="#">SOBRE</a>
+        </nav>
+    </header>
+
+    <main class="container article-content">
+        <!-- Título do Artigo -->
+        <h1>Os 5 Mandamentos da Minha Vida Digital: Como Parei de Ser um Alvo Fácil na Internet</h1>
+
+        <!-- Seção: Introdução -->
+        <section>
+            <h2>Minha Epifania Digital</h2>
+            
+            <p>
+                Por anos, eu tratei a segurança online como tratava a ida ao dentista: algo que eu sabia que era importante, mas que sempre deixava para depois. Era um assunto para "o pessoal de TI", para os nerds de plantão. Eu? Eu só queria usar a internet em paz.
+            </p>
+            <p>
+                Essa mentalidade me custou caro. Não foi um ataque hacker cinematográfico, mas uma série de "pequenos desastres": uma conta de e-mail invadida e usada para enviar spam para todos os meus contatos, uma cobrança suspeita no cartão de crédito após usar o Wi-Fi de um café, e o pânico de quase perder o acesso às minhas fotos de anos por causa de uma senha esquecida e um e-mail de recuperação que eu não usava mais.
+            </p>
+            <p>
+                Foi aí que a ficha caiu. Segurança digital não é sobre ser um especialista em tecnologia. É sobre ter bom senso e criar hábitos, assim como trancar a porta de casa ao sair ou olhar para os dois lados antes de atravessar a rua. Depois de muita pesquisa e alguns tropeços, eu destilei tudo o que aprendi em cinco mandamentos fundamentais. Esta é a minha visão, o meu modo de ver a segurança digital — e é mais simples do que você imagina.
+            </p>
+        </section>
+        
+        <!-- Lista de Mandamentos -->
+        <section class="commandments-list">
+            
+            <div class="commandment-box">
+                <h3>Mandamento 1: Trate suas Senhas como as Chaves da Sua Casa</h3>
+                <p>A gente não usa a mesma chave para a casa, o carro, o escritório e o cofre. Se você perdesse essa "chave mestra", o desastre seria total. Então, por que fazemos exatamente isso com nossas senhas?</p>
+                <p><strong>A Minha Descoberta:</strong> A ideia de "uma senha forte para tudo" é uma armadilha. O verdadeiro risco não é alguém adivinhar sua senha, mas sim um vazamento em um site qualquer. Se você usa a mesma senha no site da pizzaria do bairro e no seu e-mail, quando a pizzaria for hackeada (e ela vai ser), os criminosos terão a chave do seu e-mail, do seu banco, das suas redes sociais... de tudo.</p>
+                <h4>Como eu resolvi isso na prática:</h4>
+                <ul>
+                    <li><strong>Senhas Únicas para Tudo:</strong> Cada conta, uma senha. Sem exceção.</li>
+                    <li><strong>Frases Secretas, Não Senhas:</strong> Em vez de <code>Tr@v@_F0rt3!</code>, eu comecei a usar frases longas como <code>EuAdoroPizzaComAbacaxiAsSextas!</code>. São mais longas, mais seguras e mais fáceis de digitar.</li>
+                    <li><strong>Adotei um Gerenciador de Senhas:</strong> Esta foi a mudança mais importante. Ferramentas como Bitwarden, 1Password ou o gerenciador nativo do seu sistema criam e lembram senhas impossíveis para mim. A única senha que preciso memorizar é a "senha mestra" do gerenciador. Ele é o meu chaveiro digital.</li>
+                </ul>
+            </div>
+
+            <div class="commandment-box">
+                <h3>Mandamento 2: A Autenticação de Dois Fatores (2FA) é o seu Anjo da Guarda Digital</h3>
+                <p>Imagine que um ladrão conseguiu copiar a chave da sua casa. Ele chega na sua porta, insere a chave e... o alarme dispara, pedindo um código que só você tem no seu celular. O ladrão pode ter a chave, mas ele não vai entrar. Isso é a 2FA.</p>
+                <p><strong>A Minha Descoberta:</strong> A maioria das invasões acontece não porque sua senha era fraca, mas porque ela vazou em algum lugar. A 2FA é a sua rede de segurança. Mesmo que um hacker tenha seu usuário e senha, ele não tem o seu celular para receber o código de seis dígitos.</p>
+                <h4>Como eu resolvi isso na prática:</h4>
+                <ul>
+                    <li>Eu entrei nas configurações de segurança de <strong>TODAS</strong> as minhas contas importantes (e-mail, redes sociais, banco, Amazon) e ativei a 2FA.</li>
+                    <li>Eu sempre escolho a opção de <strong>"Aplicativo Autenticador"</strong> (como Google Authenticator ou Authy) em vez de SMS, pois é mais seguro. Demorei 15 minutos para configurar tudo, e hoje durmo muito mais tranquilo.</li>
+                </ul>
+            </div>
+            
+            <div class="commandment-box">
+                <h3>Mandamento 3: Pense em E-mails e Mensagens como Pessoas Estranhas na Rua</h3>
+                <p>Se um estranho na rua te oferecesse um presente incrível, mas pedisse seu RG e CPF para "confirmar a entrega", você desconfiaria na hora. Na internet, por algum motivo, a gente baixa a guarda.</p>
+                <p><strong>A Minha Descoberta:</strong> Phishing é 99% psicologia e 1% tecnologia. Ele funciona explorando duas coisas: urgência ("Sua conta será bloqueada!") e ganância ("Você ganhou um prêmio!"). O objetivo é fazer você agir por impulso, sem pensar.</p>
+                <h4>Como eu resolvi isso na prática:</h4>
+                <ul>
+                    <li><strong>A Regra do "Não Clique":</strong> Eu NUNCA clico em links de e-mails ou SMS que pedem uma ação urgente.</li>
+                    <li><strong>O Caminho Lento e Seguro:</strong> Se recebo um e-mail do meu banco, eu fecho o e-mail, abro meu navegador, digito o endereço do banco manualmente e acesso minha conta por lá. Se houver algo importante, estará me esperando ali. Isso elimina 100% do risco.</li>
+                </ul>
+            </div>
+
+            <div class="commandment-box">
+                <h3>Mandamento 4: Atualizações de Software são as Vacinas do seu Dispositivo</h3>
+                <p>Ninguém gosta de tomar vacina. O processo é chato, às vezes inconveniente. Mas a gente toma porque a alternativa — a doença — é infinitamente pior. As atualizações de software são exatamente isso.</p>
+                <p><strong>A Minha Descoberta:</strong> Quando a Apple, o Google ou a Microsoft lançam uma "atualização de segurança", eles estão dizendo: "Nós encontramos uma falha perigosa que hackers já estão usando, e esta é a cura". Ignorar a atualização é como recusar a vacina no meio de uma epidemia.</p>
+                <h4>Como eu resolvi isso na prática:</h4>
+                <ul>
+                    <li><strong>Ativei as Atualizações Automáticas:</strong> Em meu celular, computador e até na minha smart TV. Deixo os aparelhos fazerem o trabalho pesado enquanto eu durmo.</li>
+                    <li><strong>A Regra dos 5 Minutos:</strong> Se vejo uma notificação de atualização, não a ignoro. Paro o que estou fazendo por cinco minutos e instalo. Esses cinco minutos de inconveniência me poupam de horas de dor de cabeça no futuro.</li>
+                </ul>
+            </div>
+
+            <div class="commandment-box">
+                <h3>Mandamento 5: Wi-Fi Público é um Banheiro Público. Use, mas Não Toque em Nada Importante</h3>
+                <p>Wi-Fi grátis em cafés e aeroportos é ótimo. Mas essa rede é como um grande salão onde todos estão gritando suas informações. Alguém mal-intencionado pode estar no canto da sala, ouvindo tudo.</p>
+                <p><strong>A Minha Descoberta:</strong> Em uma rede Wi-Fi aberta, seus dados viajam sem criptografia, como um cartão-postal. Acessar seu banco nessa rede é como ditar o número do seu cartão de crédito em voz alta.</p>
+                <h4>Como eu resolvi isso na prática:</h4>
+                <ul>
+                    <li><strong>A Regra do 4G/5G:</strong> Para qualquer coisa sensível (banco, compras), eu desligo o Wi-Fi e uso os dados móveis do meu celular. É uma rede privada e muito mais segura.</li>
+                    <li><strong>Tenho uma VPN:</strong> Para viagens ou quando preciso mesmo usar o Wi-Fi público, eu uso uma VPN (Rede Privada Virtual). Ela cria um "túnel" seguro para os meus dados. É como transformar o seu cartão-postal em uma carta lacrada.</li>
+                </ul>
+            </div>
+
+        </section>
+
+        <!-- Seção: Conclusão -->
+        <section>
+            <h2>Minha Conclusão: A Segurança Perfeita é um Mito, mas a Inteligente é uma Escolha</h2>
+            <p>
+                A verdade é que você nunca será 100% "inhackeável". Mas você não precisa ser. Os hackers, como a maioria dos ladrões, são oportunistas. Eles não procuram o cofre mais difícil, mas sim a porta destrancada.
+            </p>
+            <p>
+                Ao adotar estes cinco mandamentos, você deixa de ser a porta destrancada. Você se torna a casa com fechadura dupla, alarme e um cachorro de guarda. O invasor pode até tentar, mas ao ver o esforço necessário, ele provavelmente vai procurar um alvo mais fácil na vizinhança. E essa, para mim, é a maior vitória de todas.
+            </p>
+        </section>
+    </main>
+
+    <!-- Rodapé -->
+    <footer>
+        <p>© 2025 SEC_SHELL. Todos os direitos reservados.</p>
+    </footer>
+</body>
+</html>
