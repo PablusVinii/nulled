@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O Peão que Virou Rainha: Meu Jogo de Xadrez Pós-Invasão - sec_shell</title>
+    <!-- Links para CSS e Fontes, se necessário -->
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Estilos CSS do blog sec_shell */
+        body { background-color: #121212; color: #E0E0E0; font-family: 'Fira Code', monospace; line-height: 1.8; margin: 0; }
+        .container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+        header { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; border-bottom: 1px solid #333; }
+        header .logo { font-size: 1.8em; font-weight: bold; color: #00FF00; }
+        header nav a { color: #E0E0E0; text-decoration: none; margin-left: 25px; }
+        .article-content h1 { font-size: 2.5em; color: #FFFFFF; margin: 40px 0; text-align: center; }
+        .article-content h2 { font-size: 2em; color: #00FF00; border-bottom: 1px solid #333; padding-bottom: 10px; margin-top: 40px; }
+        .article-content p { font-size: 1.1em; color: #BDBDBD; }
+        .article-content ul { list-style-type: '→ '; padding-left: 25px; }
+        .article-content li { margin-bottom: 10px; padding-left: 10px; }
+        strong { color: #00FF00; font-weight: 500; }
+        .commandment-box, .topic-box { background-color: #1E1E1E; border: 1px solid #333; padding: 20px; margin-top: 30px; }
+        .commandment-box h3, .topic-box h3 { margin-top: 0; font-size: 1.5em; color: #FFFFFF; }
+        h4 { font-size: 1.2em; color: #00FF00; margin-top: 20px; margin-bottom: 15px; }
+        footer { text-align: center; padding: 20px; margin-top: 40px; border-top: 1px solid #333; font-size: 0.9em; color: #888; }
+    </style>
+</head>
+<body>
+    <header class="container">
+        <div class="logo">sec_shell</div>
+        <nav>
+            <a href="/index.html">INÍCIO</a>
+            <a href="/articles/">ARTIGOS</a>
+            <a href="#">FERRAMENTAS</a>
+            <a href="#">SOBRE</a>
+        </nav>
+    </header>
+
+    <main class="container article-content">
+        <!-- Título do Artigo -->
+        <h1>O Peão que Virou Rainha: Meu Jogo de Xadrez Pós-Invasão</h1>
+
+        <!-- Seção de Introdução Pessoal -->
+        <section>
+            <h2>A Vitória Vazia da Primeira Shell</h2>
+            <p>A lembrança é nítida. O coração acelerado, os dedos tremendo sobre o teclado. Depois de horas de reconhecimento e uma exploração bem-sucedida, meu terminal piscou com a confirmação: `Connection from 10.10.14.2 received.` Eu estava dentro. O primeiro comando, quase um rito de passagem, foi `whoami`. A resposta: `www-data`. Eu sorri. Era uma sensação de poder absoluto, de ter atravessado a muralha. Eu achei que tinha vencido. Mas a euforia durou pouco. Tentei ler o `/etc/shadow`. "Permission denied". Tentei acessar o diretório de outro usuário. "Permission denied". Eu não era um conquistador; era um prisioneiro em uma cela de luxo. Eu tinha a chave de um quarto de serviço, mas o resto do palácio continuava trancado.</p>
+            <p>Foi ali que eu entendi a grande verdade da segurança ofensiva. Conseguir a shell inicial não é o xeque-mate. É apenas um peão que conseguiu, com muito esforço, atravessar o tabuleiro. A verdadeira ameaça, o poder real, só vem quando esse peão é promovido a rainha. Este artigo é sobre essa promoção. É sobre a arte da pós-exploração, o verdadeiro jogo de xadrez que começa *depois* que você está dentro.</p>
+        </section>
+        
+        <!-- Seções de Desenvolvimento -->
+        <section class="topics-list">
+            
+            <div class="topic-box">
+                <h3>1. De Inquilino a Dono da Casa: Escalada de Privilégios</h3>
+                <p>A sua shell inicial, como `www-data` ou um usuário de serviço, é como ser um inquilino em um prédio. Você pode andar pelo seu apartamento, mas não pode entrar no apartamento dos outros, nem na sala de controle do prédio. <strong>Escalar privilégios</strong> é o processo de encontrar uma chave mestra esquecida, uma janela do zelador aberta ou uma falha na fechadura para se tornar o síndico (`root` ou `NT AUTHORITY\SYSTEM`), com acesso irrestrito a todo o edifício.</p>
+                <p><strong>A Minha Descoberta:</strong> A ficha caiu quando parei de procurar por um único exploit mágico "0-day". A escalada de privilégios, na maioria das vezes, não é sobre genialidade, é sobre <strong>diligência</strong>. É um trabalho de detetive. A vulnerabilidade raramente está em um software exótico, mas sim em uma configuração preguiçosa, uma permissão de arquivo esquecida, uma senha anotada em um script ou um serviço antigo rodando com privilégios demais. A porta para o poder estava sempre lá, eu só não estava olhando nos lugares certos.</p>
+                <h4>Como eu resolvi isso na prática:</h4>
+                <ul>
+                    <li>Em sistemas Linux, minha primeira ação é sempre rodar um script de enumeração como o `linpeas.sh`. Ele automatiza a busca por vetores comuns: binários com permissão SUID, tarefas agendadas (cron jobs) modificáveis, senhas em arquivos de configuração, etc.</li>
+                    <li>Verificar `sudo -l` é crucial. Muitas vezes, administradores permitem que um usuário de baixo privilégio execute um comando específico como root, o que pode ser abusado para obter uma shell.</li>
+                    <li>Em ambientes Windows, o `winpeas.exe` é o equivalente. Ele busca por senhas em arquivos como `unattend.xml`, serviços com permissões fracas (Unquoted Service Paths) e DLL Hijacking.</li>
+                    <li>Estudar e entender vulnerabilidades de kernel é importante, mas o "pão com manteiga" da escalada de privilégios está na má configuração.</li>
+                </ul>
+            </div>
+
+            <div class="topic-box">
+                <h3>2. Construindo Pontes na Escuridão: Movimentação Lateral</h3>
+                <p>Agora você é o `root` na primeira máquina. Você é o dono do prédio. Mas pela janela, você vê uma cidade inteira — outros servidores, estações de trabalho, controladores de domínio. <strong>Movimentação lateral</strong> é a arte de usar sua posição no primeiro prédio para construir uma ponte secreta para o próximo, e para o próximo, sem ser visto. O objetivo não é mais conquistar uma máquina, mas sim mapear e se mover pela rede interna, que antes era invisível para você.</p>
+                <p><strong>A Minha Descoberta:</strong> O grande "insight" foi entender que o servidor web que eu invadi não era o prêmio, era o <strong>ponto de partida</strong>. Ele era minha cabeça de ponte. A partir dele, a rede parecia completamente diferente. Segmentos de rede antes inacessíveis agora estavam ao meu alcance. Foi quando parei de pensar em "invadir um servidor" e comecei a pensar em "comprometer uma rede". Isso mudou tudo. Minha máquina de ataque se tornou apenas um terminal para controlar meu "soldado" dentro do território inimigo.</p>
+                <h4>Como eu resolvi isso na prática:</h4>
+                <ul>
+                    <li>A primeira etapa é o reconhecimento interno. Usando a máquina comprometida, eu escaneio a rede local em busca de outros alvos interessantes (servidores de arquivos, bancos de dados, etc).</li>
+                    <li>Para usar minhas próprias ferramentas (como `nmap` ou `metasploit`) na rede interna, eu crio um túnel. <strong>Pivoting</strong> é a técnica para isso, e ferramentas como `chisel` ou o bom e velho `ssh` com port forwarding são essenciais para rotear meu tráfego através da máquina comprometida.</li>
+                    <li>Busco por credenciais na máquina atual. Senhas salvas em scripts, chaves SSH, hashes de senhas na memória. Muitas vezes, os administradores reutilizam senhas, e a senha de um servidor pode abrir as portas de dezenas de outros.</li>
+                    <li>Em ambientes Windows, técnicas como Pass-the-Hash com `Mimikatz` são extremamente eficazes para se mover lateralmente sem nem precisar saber a senha em texto claro.</li>
+                </ul>
+            </div>
+
+            <div class="topic-box">
+                <h3>3. Desenhando o Mapa do Tesouro: Dominando o Active Directory</h3>
+                <p>Em 90% das redes corporativas, há um rei. E o nome desse rei é <strong>Active Directory (AD)</strong>. O AD não é apenas um servidor; é o cartório central da rede. Ele sabe quem são todos os usuários, a quais máquinas eles têm acesso e quais são seus privilégios. Se a movimentação lateral é conquistar as ruas, comprometer o AD é como tomar o palácio do governo. Quem controla o AD, controla a rede inteira.</p>
+                <p><strong>A Minha Descoberta:</strong> A primeira vez que rodei o BloodHound e vi o resultado, minha mandíbula caiu. A rede, que antes parecia um labirinto caótico, de repente se tornou um mapa claro, com setas vermelhas apontando o caminho exato do meu humilde usuário até o "Domain Admin". O BloodHound não encontra vulnerabilidades de software; ele encontra falhas de relacionamento e configuração. Ele me mostrou que a segurança do AD não é uma fortaleza, mas uma teia de aranha. E se você souber onde puxar, a teia inteira se desfaz.</p>
+                <h4>Como eu resolvi isso na prática:</h4>
+                <ul>
+                    <li>Uso o ingestor do BloodHound (`SharpHound` para Windows) na máquina comprometida para coletar informações sobre usuários, grupos, sessões e políticas.</li>
+                    <li>Carrego os dados na interface gráfica do BloodHound na minha máquina de ataque. Ele visualiza as relações de confiança e me mostra os caminhos de ataque mais curtos para privilégios elevados.</li>
+                    <li>Uma vez que um caminho é identificado, uso técnicas como Kerberoasting para extrair hashes de contas de serviço e tentar quebrá-los offline.</li>
+                    <li>Se eu conseguir acesso a uma conta com privilégios, o objetivo final é um ataque de DC-Sync com o `Mimikatz` para extrair todos os hashes de senha do controlador de domínio, efetivamente me dando as chaves do reino.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Seção de Conclusão Filosófica -->
+        <section>
+            <h2>A Mentalidade do Mestre de Xadrez</h2>
+            <p>Hoje, eu não vejo mais a primeira shell como uma vitória. Eu a vejo como o primeiro movimento em um jogo de xadrez complexo e fascinante. O verdadeiro teste de habilidade não está em forçar a porta, mas na paciência, na estratégia e na furtividade com que você se move pelas sombras uma vez que está dentro. A pós-exploração nos ensina que a segurança é um ecossistema. Cada máquina, cada usuário, cada permissão é uma peça no tabuleiro. E o bom atacante (ou o bom defensor) não é aquele que conhece o melhor exploit, mas aquele que consegue ver o tabuleiro inteiro e pensar dez movimentos à frente. O peão pode ser importante, mas o jogo é sempre sobre a rainha.</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 SEC_SHELL. Todos os direitos reservados.</p>
+    </footer>
+</body>
+</html>
